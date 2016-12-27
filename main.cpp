@@ -120,7 +120,7 @@ void segmentasi(Mat img){
 
     subtract(channel[2],channel[1],subb);
 
-//    imshow("Original", img);
+    imshow("Original", img);
 
 //    imshow("Hasil sub", subb);
 
@@ -184,10 +184,10 @@ void trainingData(int status){
     int N = 0;
     string path;
     if (status){
-        N = 87; //jumlah data training class ikan
+        N = 86; //jumlah data training class ikan
         path = pathDataTrainIkan;
     } else {
-        N=10; //jumlah data training class non-ikan
+        N=11; //jumlah data training class non-ikan
         path = pathDataTrainNonIkan;
     }
 
@@ -265,8 +265,8 @@ void testingData(Mat img){
                     if(getKnn(&feature)){
                       Scalar color = Scalar( rng.uniform(0, 255), rng.uniform(0,255), rng.uniform(0,255) );
                       //drawContours( imgOri, contours_poly, i, color, 1, 8, vector<Vec4i>(), 0, Point() );
-                      rectangle( img, boundRect[i].tl(), boundRect[i].br(), color, 2, 8, 0 );
-                      //circle( imgOri, center[i], (int)radius[i], color, 2, 8, 0 );
+                      rectangle( img, boundRect[i].tl(), boundRect[i].br(), color, 3, 8, 0 );
+                      circle( imgOri, center[i], (int)radius[i], color, 3, 8, 0 );
                     }
 //                }
              }
@@ -279,10 +279,16 @@ void testingData(Mat img){
 
 int main()
 {
-    Mat testImg = imread("neon2.jpg");
+    Mat testImg = imread("neon8.jpg");
     trainingData(1);
     trainingData(0);
     testingData(testImg);
+    for(int i =0; i< dataset.size(); i++){
+        for (int j =0; j <6 ; j++){
+            cout << dataset[i][j] <<" ";
+        }
+        cout << endl;
+    }
     cvWaitKey(0);
 
 
